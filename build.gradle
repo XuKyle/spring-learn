@@ -25,6 +25,9 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.aspectj:aspectjweaver:1.8.13")
+	compile("log4j:log4j:${log4jVersion}")
+
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
