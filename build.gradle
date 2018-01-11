@@ -27,7 +27,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.aspectj:aspectjweaver:1.8.13")
 	compile("log4j:log4j:${log4jVersion}")
+	compile group: 'javax.inject', name: 'javax.inject', version: '1'
 
 	runtime('org.springframework.boot:spring-boot-devtools')
+	testCompile "com.github.stefanbirkner:system-rules:${systemRulesVersion}"
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

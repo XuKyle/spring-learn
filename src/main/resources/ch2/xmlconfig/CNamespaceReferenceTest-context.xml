@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="compactDisc" class="com.kylexu.springlearn.ch2.xmlconfig.SgtPeppers"/>
+
+    <bean id="cdPlayer" class="com.kylexu.springlearn.ch2.xmlconfig.CDPlayer"
+          c:cd-ref="compactDisc"/>
+
+    <bean id="cdPlayer1" class="com.kylexu.springlearn.ch2.xmlconfig.CDPlayer"
+          c:_0-ref="compactDisc"/>
+
+    <bean id="cdPlayer2" class="com.kylexu.springlearn.ch2.xmlconfig.CDPlayer"
+          c:_-ref="compactDisc"/>
+</beans>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="compactDisc" class="com.kylexu.springlearn.ch2.xmlconfig.BlankDisc"
+          c:_0="Sgt. Pepper's Lonely Hearts Club Band"
+          c:_1="The Beatles"/>
+
+    <bean id="cdPlayer" class="com.kylexu.springlearn.ch2.xmlconfig.CDPlayer"
+          c:_-ref="compactDisc1"/>
+
+    <bean id="compactDisc1" class="com.kylexu.springlearn.ch2.xmlconfig.BlankDisc"
+          c:title="Sgt. Pepper's Lonely Hearts Club Band"
+          c:artist="The Beatles"/>
+
+    <!--<bean id="compactDisc2" class="com.kylexu.springlearn.ch2.xmlconfig.BlankDisc"-->
+          <!--c:_title="Sgt. Pepper's Lonely Hearts Club Band"-->
+          <!--c:_artist="The Beatles"/>-->
+
+    <import resource="CNamespaceValueTest-context.xml"/>
+
+</beans>
