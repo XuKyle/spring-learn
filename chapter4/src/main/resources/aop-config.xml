@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-xsd"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <aop:config>
+        <aop:aspect ref="audience">
+            <aop:pointcut id="performance"
+                          expression="execution(* com.kylexu.chapter4.concert.Performance.performance(..))"/>
+
+            <aop:before pointcut="execution(* com.kylexu.chapter4.concert.Performance.performance(..))"
+                        method="silenceCellPhones"/>
+
+            <aop:before method="silenceCellPhones" pointcut-ref="performance"/>
+
+            <aop:before method="silenceCellPhones" pointcut-ref="performance"/>
+
+            <aop:after-returning method="applause" pointcut-ref="performance"/>
+
+            <aop:after-throwing method="demandRefund" pointcut-ref="performance"/>
+
+        </aop:aspect>
+    </aop:config>
+
+    <aop:config>
+        <aop:aspect ref="audience">
+            <aop:pointcut id="performance"
+                          expression="execution(* com.kylexu.chapter4.concert.Performance.performance(..))"/>
+
+            <aop:around method="watchPerformance" pointcut-ref="performance"/>
+
+        </aop:aspect>
+    </aop:config>
+
+
+    <bean id="trackCounter" class="com.kylexu.chapter4.concert.TrackCounter"/>
+    <bean id="cd" class="com.kylexu.chapter4.concert.BlankDisc">
+        <property name="title" value="七里香"/>
+        <property name="artist" value="Jay"/>
+        <property name="tracks">
+            <list>
+                <value>七里香</value>
+                <value>搁浅</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:aspect ref="trackCounter">
+            <aop:pointcut id="trackPlayed"
+                          expression="execution(* com.kylexu.chapter4.concert.CompactDisc.playTrack(int)) and args(trackNumber)"/>
+            <aop:before method="countTrack" pointcut-ref="trackPlayed"/>
+        </aop:aspect>
+    </aop:config>
+
+    <aop:config>
+        <aop:aspect>
+            <aop:declare-parents types-matching="com.kylexu.chapter4.concert.Performance+"
+                                 implement-interface="com.kylexu.chapter4.concert.Encoreable"
+                                 default-impl="com.kylexu.chapter4.concert.DefaultEncoreable"/>
+        </aop:aspect>
+    </aop:config>
+
+
+    <bean id="audience" class="com.kylexu.chapter4.concert.Audience"/>
+
+</beans>
