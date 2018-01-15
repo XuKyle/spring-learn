@@ -27,23 +27,29 @@ public class SpittleController {
         this.spittleRepository = spittleRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    /*@RequestMapping(method = RequestMethod.GET)
     public String spittles(Model model) {
         model.addAttribute(spittleRepository.findSpittles(Long.MAX_VALUE, 20));
         return "spittles";
-    }
+    }*/
 
-    /*@RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Spittle> spittles(
             @RequestParam(value = "max", defaultValue = MAX_LONG_AS_STRING) long max,
             @RequestParam(value = "count", defaultValue = "20") int count) {
         return spittleRepository.findSpittles(max, count);
     }
 
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
+    public String showSpittle(
+            @RequestParam("spittleId") long spittleId, Model model) {
+        model.addAttribute(spittleRepository.findOne(spittleId));
+        return "spittle";
+    }
+
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
     public String spittle(
-            @PathVariable("spittleId") long spittleId,
-            Model model) {
+            @PathVariable("spittleId") long spittleId, Model model) {
         model.addAttribute(spittleRepository.findOne(spittleId));
         return "spittle";
     }
@@ -53,6 +59,6 @@ public class SpittleController {
         spittleRepository.save(new Spittle(null, form.getMessage(), new Date(),
                 form.getLongitude(), form.getLatitude()));
         return "redirect:/spittles";
-    }*/
+    }
 
 }
